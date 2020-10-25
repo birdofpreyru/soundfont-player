@@ -1,7 +1,9 @@
+# SoundFont Player
+
+_Patched fork of [`soundfont-player`](https://www.npmjs.com/package/soundfont-player)_
+
 # soundfont-player [![npm](https://img.shields.io/npm/v/soundfont-player.svg?style=flat-square)](https://www.npmjs.com/package/soundfont-player)
 
-[![Build Status](https://img.shields.io/travis/danigb/soundfont-player/master.svg?style=flat-square)](https://travis-ci.org/danigb/soundfont-player)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard) [![license](https://img.shields.io/npm/l/soundfont-player.svg?style=flat-square)](https://www.npmjs.com/package/soundfont-player)
 
 A soundfont loader/player to play MIDI sounds using WebAudio API.
 

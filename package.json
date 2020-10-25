@@ -1,25 +1,33 @@
 {
-  "name": "soundfont-player",
-  "version": "0.12.0",
+  "name": "@dr.pogodin/soundfont-player",
+  "version": "0.13.0",
   "description": "Lightweight soundfont (music instrument) loader and player for WebAudio API",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha && echo 'ESLINT...' && eslint lib/*.js && echo 'Done.'",
-    "build:dist": "browserify lib/index.js > dist/soundfont-player.js && uglifyjs dist/soundfont-player.js > dist/soundfont-player.min.js",
+    "build": "browserify lib/index.js > dist/soundfont-player.js && uglifyjs dist/soundfont-player.js > dist/soundfont-player.min.js",
     "api": "jsdoc2md lib/index.js > API.md",
-    "prepublish": "npm test && npm run dist"
+    "prepublish": "npm test && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/danigb/soundfont-player"
+    "url": "https://github.com/birdofpreyru/soundfont-player"
   },
-  "keywords": ["music", "audio", "waa", "webaudio", "soundfont", "midi"],
-  "author": "danigb <danigb@gmail.com>",
+  "keywords": [
+    "music",
+    "audio",
+    "waa",
+    "webaudio",
+    "soundfont",
+    "midi"
+  ],
+  "author": "Dr. Sergey Pogodin <doc@pogodin.studio>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/danigb/soundfont-player/issues"
+    "url": "https://github.com/birdofpreyru/soundfont-player/issues"
   },
   "dependencies": {
+    "@dr.pogodin/audio-loader": "file:../audio-loader/dr.pogodin-audio-loader-1.1.0.tgz",
     "audio-loader": "^0.5.0",
     "note-parser": "^2.0.0",
     "sample-player": "^0.5.5"
