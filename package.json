@@ -4,7 +4,8 @@
   "description": "Lightweight soundfont (music instrument) loader and player for WebAudio API",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --timeout 5000 && echo 'ESLINT...' && eslint lib/*.js && echo 'Done.'",
+    "test": "npm run lint && mocha --timeout 5000",
+    "lint": "eslint .",
     "api": "jsdoc2md lib/index.js > API.md"
   },
   "repository": {
@@ -30,13 +31,8 @@
     "sample-player": "^0.5.5"
   },
   "devDependencies": {
-    "eslint": "^4.2.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^5",
+    "mocha": "^5.2.0",
+    "standard": "^15.0.0",
     "web-audio-test-api": "^0.5.2"
   }
 }

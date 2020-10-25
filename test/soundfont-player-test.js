@@ -8,7 +8,7 @@ var Soundfont = require('..')
 
 var piano = fs.readFileSync(path.join(__dirname, '../examples/assets/acoustic_grand_piano-ogg.js'))
 
-const SF_BASE = 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages';
+const SF_BASE = 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages'
 
 load.fetch = function (url) {
   load.fetch.url = url
@@ -28,31 +28,31 @@ describe('Soundfont player', function () {
         .then(function (piano) {
           assert.strictEqual(
             piano.url,
-            `${SF_BASE}/MusyngKite/acoustic_grand_piano-mp3.js`,
+            `${SF_BASE}/MusyngKite/acoustic_grand_piano-mp3.js`
           )
         })
     })
     it('the promise resolve to an instrument', () => {
       var ac = new AudioContext()
       return Soundfont.instrument(ac, 'acoustic_grand_piano')
-      .then((piano) => {
-        assert(piano)
-        assert.strictEqual(piano.name, 'acoustic_grand_piano')
-        assert.strictEqual(typeof piano.play, 'function')
-      })
+        .then((piano) => {
+          assert(piano)
+          assert.strictEqual(piano.name, 'acoustic_grand_piano')
+          assert.strictEqual(typeof piano.play, 'function')
+        })
     })
     it('options.nameToUrl', function () {
-      const TEST_URL = `${SF_BASE}/MusyngKite/acoustic_grand_piano-mp3.js`;
+      const TEST_URL = `${SF_BASE}/MusyngKite/acoustic_grand_piano-mp3.js`
       var ac = new AudioContext()
-      var toUrl = () => TEST_URL;
+      var toUrl = () => TEST_URL
       return Soundfont.instrument(ac, 'xxx', { nameToUrl: toUrl })
-        .then((piano) => assert.strictEqual(piano.url, TEST_URL));
+        .then((piano) => assert.strictEqual(piano.url, TEST_URL))
     })
   })
   describe('Build urls', function () {
     it('get default url', function () {
       assert.strictEqual(Soundfont.nameToUrl('marimba'),
-        `${SF_BASE}/MusyngKite/marimba-mp3.js`);
+        `${SF_BASE}/MusyngKite/marimba-mp3.js`)
     })
     it('get FluidR3_GM url', function () {
       assert.strictEqual(Soundfont.nameToUrl('marimba', 'FluidR3_GM'),
