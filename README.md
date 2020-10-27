@@ -2,9 +2,6 @@
 
 _Patched fork of [`soundfont-player`](https://www.npmjs.com/package/soundfont-player)_
 
-# soundfont-player [![npm](https://img.shields.io/npm/v/soundfont-player.svg?style=flat-square)](https://www.npmjs.com/package/soundfont-player)
-
-
 A soundfont loader/player to play MIDI sounds using WebAudio API.
 
 It loads Benjamin Gleitzman's package of
