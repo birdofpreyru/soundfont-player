@@ -1,12 +1,12 @@
 /* global describe it AudioContext */
 require('web-audio-test-api')
-var assert = require('assert')
-var fs = require('fs')
-var path = require('path')
-var load = require('@dr.pogodin/audio-loader')
-var Soundfont = require('..')
+const assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const load = require('@dr.pogodin/audio-loader')
+const Soundfont = require('..')
 
-var piano = fs.readFileSync(path.join(__dirname, '../examples/assets/acoustic_grand_piano-ogg.js'))
+const piano = fs.readFileSync(path.join(__dirname, '../examples/assets/acoustic_grand_piano-ogg.js'))
 
 const SF_BASE = 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages'
 
@@ -18,12 +18,12 @@ load.fetch = function (url) {
 describe('Soundfont player', function () {
   describe('Load instruments', function () {
     it('returns a promise', function () {
-      var ac = new AudioContext()
+      const ac = new AudioContext()
       assert.strictEqual(typeof Soundfont.instrument(ac, 'piano')
         .then, 'function')
     })
     it('loads mp3 by default', () => {
-      var ac = new AudioContext()
+      const ac = new AudioContext()
       return Soundfont.instrument(ac, 'acoustic_grand_piano')
         .then(function (piano) {
           assert.strictEqual(
@@ -33,7 +33,7 @@ describe('Soundfont player', function () {
         })
     })
     it('the promise resolve to an instrument', () => {
-      var ac = new AudioContext()
+      const ac = new AudioContext()
       return Soundfont.instrument(ac, 'acoustic_grand_piano')
         .then((piano) => {
           assert(piano)
@@ -43,8 +43,8 @@ describe('Soundfont player', function () {
     })
     it('options.nameToUrl', function () {
       const TEST_URL = `${SF_BASE}/MusyngKite/acoustic_grand_piano-mp3.js`
-      var ac = new AudioContext()
-      var toUrl = () => TEST_URL
+      const ac = new AudioContext()
+      const toUrl = () => TEST_URL
       return Soundfont.instrument(ac, 'xxx', { nameToUrl: toUrl })
         .then((piano) => assert.strictEqual(piano.url, TEST_URL))
     })

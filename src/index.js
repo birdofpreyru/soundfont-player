@@ -1,7 +1,7 @@
 'use strict'
 
-var load = require('@dr.pogodin/audio-loader')
-var player = require('sample-player')
+const load = require('@dr.pogodin/audio-loader')
+const player = require('sample-player')
 
 /**
  * Load a soundfont instrument. It returns a promise that resolves to a
@@ -39,12 +39,12 @@ var player = require('sample-player')
  */
 function instrument (ac, name, options) {
   if (arguments.length === 1) return function (n, o) { return instrument(ac, n, o) }
-  var opts = options || {}
-  var isUrl = opts.isSoundfontURL || isSoundfontURL
-  var toUrl = opts.nameToUrl || nameToUrl
-  var url = isUrl(name) ? name : toUrl(name, opts.soundfont, opts.format)
+  const opts = options || {}
+  const isUrl = opts.isSoundfontURL || isSoundfontURL
+  const toUrl = opts.nameToUrl || nameToUrl
+  const url = isUrl(name) ? name : toUrl(name, opts.soundfont, opts.format)
   return load(url, { only: opts.only || opts.notes }).then(function (buffers) {
-    var p = player(ac, buffers, opts).connect(opts.destination ? opts.destination : ac.destination)
+    const p = player(ac, buffers, opts).connect(opts.destination ? opts.destination : ac.destination)
     p.url = url
     p.name = name
     return p
@@ -76,7 +76,7 @@ function nameToUrl (name, sf, format) {
 
 // In the 1.0.0 release it will be:
 // var Soundfont = {}
-var Soundfont = require('./legacy')
+const Soundfont = require('./legacy')
 Soundfont.instrument = instrument
 Soundfont.nameToUrl = nameToUrl
 

@@ -1,6 +1,6 @@
 /* global AudioContext */
-var ac = new AudioContext()
-var sf = require('..')
+const ac = new AudioContext()
+const sf = require('..')
 
 document.body.innerHTML = '<h1>Local piano</h1>' +
  '<h3>Load a piano soundfont from localhost, but only C4 major scale notes</h3>' +

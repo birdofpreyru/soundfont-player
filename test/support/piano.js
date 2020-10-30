@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable no-use-before-define, no-var */
 
 if (typeof (MIDI) === 'undefined') var MIDI = {}
 if (typeof (MIDI.Soundfont) === 'undefined') MIDI.Soundfont = {}

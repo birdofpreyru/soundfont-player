@@ -1,6 +1,6 @@
 'use strict'
 
-var parser = require('note-parser')
+const parser = require('note-parser')
 
 /**
  * Create a Soundfont object
@@ -29,13 +29,13 @@ Soundfont.prototype.onready = function (callback) {
 Soundfont.prototype.instrument = function (name, options) {
   console.warn('new Soundfont().instrument() is deprecated.')
   console.log('Please use Soundfont.instrument() instead.')
-  var ctx = this.ctx
+  const ctx = this.ctx
   name = name || 'default'
   if (name in this.instruments) return this.instruments[name]
-  var inst = { name: name, play: oscillatorPlayer(ctx, options) }
+  const inst = { name: name, play: oscillatorPlayer(ctx, options) }
   this.instruments[name] = inst
   if (name !== 'default') {
-    var promise = Soundfont.instrument(ctx, name, options).then(function (instrument) {
+    const promise = Soundfont.instrument(ctx, name, options).then(function (instrument) {
       inst.play = instrument.play
       return inst
     })
@@ -98,23 +98,23 @@ function oscillatorPlayer (ctx, defaultOptions) {
   return function (note, time, duration, options) {
     console.warn('The oscillator player is deprecated.')
     console.log('Starting with version 0.9.0 you will have to wait until the soundfont is loaded to play sounds.')
-    var midi = note > 0 && note < 129 ? +note : parser.midi(note)
-    var freq = midi ? parser.midiToFreq(midi, 440) : null
+    const midi = note > 0 && note < 129 ? +note : parser.midi(note)
+    const freq = midi ? parser.midiToFreq(midi, 440) : null
     if (!freq) return
 
     duration = duration || 0.2
 
     options = options || {}
-    var destination = options.destination || defaultOptions.destination || ctx.destination
-    var vcoType = options.vcoType || defaultOptions.vcoType || 'sine'
-    var gain = options.gain || defaultOptions.gain || 0.4
+    const destination = options.destination || defaultOptions.destination || ctx.destination
+    const vcoType = options.vcoType || defaultOptions.vcoType || 'sine'
+    const gain = options.gain || defaultOptions.gain || 0.4
 
-    var vco = ctx.createOscillator()
+    const vco = ctx.createOscillator()
     vco.type = vcoType
     vco.frequency.value = freq
 
     /* VCA */
-    var vca = ctx.createGain()
+    const vca = ctx.createGain()
     vca.gain.value = gain
 
     /* Connections */

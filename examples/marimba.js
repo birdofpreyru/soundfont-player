@@ -1,8 +1,8 @@
-var AudioContext = window.AudioContext || window.webkitAudioContext
-var ac = new AudioContext()
-var Soundfont = require('..')
+const AudioContext = window.AudioContext || window.webkitAudioContext
+const ac = new AudioContext()
+const Soundfont = require('..')
 
-var vca = ac.createGain()
+const vca = ac.createGain()
 vca.gain.value = 1
 vca.connect(ac.destination)
 

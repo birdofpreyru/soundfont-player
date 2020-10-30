@@ -1,6 +1,6 @@
 {
   "name": "@dr.pogodin/soundfont-player",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "description": "Lightweight soundfont (music instrument) loader and player for WebAudio API",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.1",
-    "@dr.pogodin/audio-loader": "^1.1.2",
+    "@dr.pogodin/audio-loader": "^1.1.3",
     "note-parser": "^2.0.0",
     "sample-player": "^0.5.5"
   },
@@ -42,7 +42,7 @@
     "@babel/register": "^7.12.1",
     "mocha": "^8.1.3",
     "rimraf": "^3.0.2",
-    "standard": "^15.0.0",
+    "standard": "^16.0.0",
     "web-audio-test-api": "^0.5.2"
   }
 }

@@ -1,10 +1,10 @@
 
-var ctx = new window.AudioContext()
-var soundfont = require('..')(ctx)
+const ctx = new window.AudioContext()
+const soundfont = require('..')(ctx)
 
-var osc = soundfont.instrument()
+const osc = soundfont.instrument()
 osc.onready(function () {
-  var time = ctx.currentTime
+  const time = ctx.currentTime
   'G4 B4 D5'.split(' ').forEach(function (note, index) {
     osc.play(note, time + index)
   })
