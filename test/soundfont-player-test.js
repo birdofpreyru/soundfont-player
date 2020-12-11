@@ -6,6 +6,8 @@ const path = require('path')
 const load = require('@dr.pogodin/audio-loader')
 const Soundfont = require('..')
 
+global.atob = require('atob')
+
 const piano = fs.readFileSync(path.join(__dirname, '../examples/assets/acoustic_grand_piano-ogg.js'))
 
 const SF_BASE = 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages'

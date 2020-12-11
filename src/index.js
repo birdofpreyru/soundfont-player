@@ -1,7 +1,5 @@
-'use strict'
-
-const load = require('@dr.pogodin/audio-loader')
-const player = require('sample-player')
+import load from '@dr.pogodin/audio-loader'
+import player from 'sample-player'
 
 /**
  * Load a soundfont instrument. It returns a promise that resolves to a
@@ -43,12 +41,13 @@ function instrument (ac, name, options) {
   const isUrl = opts.isSoundfontURL || isSoundfontURL
   const toUrl = opts.nameToUrl || nameToUrl
   const url = isUrl(name) ? name : toUrl(name, opts.soundfont, opts.format)
-  return load(url, { only: opts.only || opts.notes }).then(function (buffers) {
-    const p = player(ac, buffers, opts).connect(opts.destination ? opts.destination : ac.destination)
-    p.url = url
-    p.name = name
-    return p
-  })
+  return load(url, { context: ac, only: opts.only || opts.notes })
+    .then(function (buffers) {
+      const p = player(ac, buffers, opts).connect(opts.destination ? opts.destination : ac.destination)
+      p.url = url
+      p.name = name
+      return p
+    })
 }
 
 function isSoundfontURL (name) {
