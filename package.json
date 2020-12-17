@@ -1,6 +1,6 @@
 {
   "name": "@dr.pogodin/soundfont-player",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "Lightweight soundfont (music instrument) loader and player for WebAudio API",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "@babel/register": "^7.12.10",
     "atob": "^2.1.2",
     "mocha": "^8.2.1",
