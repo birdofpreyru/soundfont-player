@@ -8,9 +8,8 @@ It loads Benjamin Gleitzman's package of
 [pre-rendered sound fonts](https://github.com/gleitz/midi-js-soundfonts) by default with no server setup. Just a few lines of javascript:
 
 ```js
-Soundfont.instrument(new AudioContext(), 'acoustic_grand_piano').then(function (piano) {
-  piano.play('C4')
-})
+newInstrument(new AudioContext(), 'acoustic_grand_piano')
+  .then((piano) => piano.play('C4'));
 ```
 
 It is a much simpler and lightweight replacement for [MIDI.js](https://github.com/mudcube/MIDI.js) soundfont loader (MIDI.js is much bigger, capable of play midi files, for example, but it weights an order of magnitude more).
@@ -34,7 +33,7 @@ Or download the [minified code](https://raw.githubusercontent.com/danigb/soundfo
 ```html
 <script src="soundfont-player.js"></script>
 <script>
-  Soundfont.instrument(new AudioContext(), 'marimba').then(function (marimba) {
+  newInstrument(new AudioContext(), 'marimba').then(function (marimba) {
   })
 </script>
 ```
@@ -46,11 +45,11 @@ __The soundfont loader__
 Out of the box are two Soundfonts available: MusyngKite and FluidR3_GM (MusyngKite by default: has more quality, but also weights more). You can load them with `instrument` function:
 
 ```js
-Soundfont.instrument(ac, 'clavinet').then(function (clavinet) {
+newInstrument(ac, 'clavinet').then(function (clavinet) {
   clavinet.play('C4')
 })
 // or use FluidR3_GM
-Soundfont.instrument(ac, 'clavinet', { soundfont: 'FluidR3_GM' }).then(function (clavinet) {
+newInstrument(ac, 'clavinet', { soundfont: 'FluidR3_GM' }).then(function (clavinet) {
   clavinet.play('C4')
 })
 ```
@@ -58,9 +57,9 @@ Soundfont.instrument(ac, 'clavinet', { soundfont: 'FluidR3_GM' }).then(function 
 You can load your own Soundfont files passing the .js path or url:
 
 ```js
-Soundfont.instrument(ac, '/soundfonts/clavinet-mp3.js').then(...)
+newInstrument(ac, '/soundfonts/clavinet-mp3.js').then(...)
 // or
-Soundfont.instrument(ac, 'clavinet-mp3.js', { from: 'server.com/soundfonts/' })
+newInstrument(ac, 'clavinet-mp3.js', { from: 'server.com/soundfonts/' })
 ```
 
 __The soundfont player__
@@ -69,7 +68,7 @@ Once you have an instrument you can:
 
 ```js
 // The first step is always create an instrument:
-Soundfont.instrument(ac, 'clavinet').then(function (clavinet) {
+newInstrument(ac, 'clavinet').then(function (clavinet) {
   // Then you can play a note using names or midi numbers:
   clavinet.play('C4')
   clavinet.play(69)
@@ -141,7 +140,7 @@ limit the number of notes you want and reduce the time to load the instrument.
 ```js
 var Soundfont = require('soundfont-player')
 var ac = new AudioContext()
-Soundfont.instrument(ac, 'marimba', { soundfont: 'MusyngKite' }).then(function (marimba) {
+newInstrument(ac, 'marimba', { soundfont: 'MusyngKite' }).then(function (marimba) {
   marimba.play('C4')
 })
 ```

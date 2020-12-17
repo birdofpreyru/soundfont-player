@@ -1,3 +1,3 @@
 module.exports = {
-  presets: [['./config/babel/preset', { targets: 'defaults' }]]
-}
+  presets: [['./config/babel/preset', { targets: 'defaults' }]],
+};

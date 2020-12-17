@@ -1,5 +1,26 @@
-import load from '@dr.pogodin/audio-loader'
-import player from 'sample-player'
+import load from '@dr.pogodin/audio-loader';
+import player from 'sample-player';
+
+function isSoundfontURL(name) {
+  return /\.js(\?.*)?$/i.test(name);
+}
+
+/**
+ * Given an instrument name returns a URL to to the Benjamin Gleitzman's
+ * package of [pre-rendered sound fonts](https://github.com/gleitz/midi-js-soundfonts)
+ *
+ * @param {String} name - instrument name
+ * @param {String} soundfont - (Optional) the soundfont name.
+ *  One of 'FluidR3_GM' or 'MusyngKite' ('MusyngKite' by default)
+ * @param {String} format - (Optional) Can be 'mp3' or 'ogg' (mp3 by default)
+ * @returns {String} the Soundfont file url
+ * @example
+ * var Soundfont = require('soundfont-player')
+ * Soundfont.nameToUrl('marimba', 'mp3')
+ */
+export function nameToUrl(name, sf = 'MusyngKite', format = 'mp3') {
+  return `https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/${sf}/${name}-${format}.js`;
+}
 
 /**
  * Load a soundfont instrument. It returns a promise that resolves to a
@@ -17,7 +38,8 @@ import player from 'sample-player'
  * - `format`: the soundfont format. 'mp3' by default. Can be 'ogg'
  * - `soundfont`: the soundfont name. 'MusyngKite' by default. Can be 'FluidR3_GM'
  * - `nameToUrl` <Function>: a function to convert from instrument names to URL
- * - `destination`: by default Soundfont uses the `audioContext.destination` but you can override it.
+ * - `destination`: by default Soundfont uses the `audioContext.destination`
+ *    but you can override it.
  * - `gain`: the gain of the player (1 by default)
  * - `notes`: an array of the notes to decode. It can be an array of strings
  * with note names or an array of numbers with midi note numbers. This is a
@@ -27,7 +49,7 @@ import player from 'sample-player'
  * @param {AudioContext} ac - the audio context
  * @param {String} name - the instrument name. For example: 'acoustic_grand_piano'
  * @param {Object} options - (Optional) the same options as Soundfont.loadBuffers
- * @return {Promise}
+ * @return {Promise<object>}
  *
  * @example
  * var Soundfont = require('soundfont-player')
@@ -35,49 +57,17 @@ import player from 'sample-player'
  *   marimba.play('C4')
  * })
  */
-function instrument (ac, name, options) {
-  if (arguments.length === 1) return function (n, o) { return instrument(ac, n, o) }
-  const opts = options || {}
-  const isUrl = opts.isSoundfontURL || isSoundfontURL
-  const toUrl = opts.nameToUrl || nameToUrl
-  const url = isUrl(name) ? name : toUrl(name, opts.soundfont, opts.format)
+export function newInstrument(ac, name, options) {
+  const opts = options || {};
+  const isUrl = opts.isSoundfontURL || isSoundfontURL;
+  const toUrl = opts.nameToUrl || nameToUrl;
+  const url = isUrl(name) ? name : toUrl(name, opts.soundfont, opts.format);
   return load(url, { context: ac, only: opts.only || opts.notes })
-    .then(function (buffers) {
-      const p = player(ac, buffers, opts).connect(opts.destination ? opts.destination : ac.destination)
-      p.url = url
-      p.name = name
-      return p
-    })
+    .then((buffers) => {
+      const p = player(ac, buffers, opts)
+        .connect(opts.destination ? opts.destination : ac.destination);
+      p.url = url;
+      p.name = name;
+      return p;
+    });
 }
-
-function isSoundfontURL (name) {
-  return /\.js(\?.*)?$/i.test(name)
-}
-
-/**
- * Given an instrument name returns a URL to to the Benjamin Gleitzman's
- * package of [pre-rendered sound fonts](https://github.com/gleitz/midi-js-soundfonts)
- *
- * @param {String} name - instrument name
- * @param {String} soundfont - (Optional) the soundfont name. One of 'FluidR3_GM'
- * or 'MusyngKite' ('MusyngKite' by default)
- * @param {String} format - (Optional) Can be 'mp3' or 'ogg' (mp3 by default)
- * @returns {String} the Soundfont file url
- * @example
- * var Soundfont = require('soundfont-player')
- * Soundfont.nameToUrl('marimba', 'mp3')
- */
-function nameToUrl (name, sf, format) {
-  format = format === 'ogg' ? format : 'mp3'
-  sf = sf === 'FluidR3_GM' ? sf : 'MusyngKite'
-  return 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/' + sf + '/' + name + '-' + format + '.js'
-}
-
-// In the 1.0.0 release it will be:
-// var Soundfont = {}
-const Soundfont = require('./legacy')
-Soundfont.instrument = instrument
-Soundfont.nameToUrl = nameToUrl
-
-if (typeof module === 'object' && module.exports) module.exports = Soundfont
-if (typeof window !== 'undefined') window.Soundfont = Soundfont
