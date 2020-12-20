@@ -13,9 +13,12 @@ const pianoSoundfont = fs.readFileSync(
   `${__dirname}/support/acoustic_grand_piano-ogg.js`,
 );
 
+const NETWORK_ERROR = 'NETWORK_ERROR';
 const SF_BASE = 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages';
 
 load.fetch = function fetch(url) {
+  if (url === NETWORK_ERROR) return Promise.reject(Error('Network error'));
+
   load.fetch.url = url;
   return Promise.resolve(pianoSoundfont.toString());
 };
@@ -54,6 +57,10 @@ describe('Soundfont player', () => {
       const toUrl = () => TEST_URL;
       return newInstrument(ac, 'xxx', { nameToUrl: toUrl })
         .then((piano) => assert.strictEqual(piano.url, TEST_URL));
+    });
+    it('throws correctly in case of network errors', () => {
+      const ac = new AudioContext();
+      assert.rejects(newInstrument(ac, NETWORK_ERROR));
     });
   });
   describe('Build urls', () => {
