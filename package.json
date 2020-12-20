@@ -1,6 +1,6 @@
 {
   "name": "@dr.pogodin/soundfont-player",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "Lightweight soundfont (music instrument) loader and player for WebAudio API",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/register": "^7.12.10",
     "atob": "^2.1.2",
-    "eslint": "^7.15.0",
+    "eslint": "^7.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1",
