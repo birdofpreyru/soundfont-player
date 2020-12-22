@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@dr.pogodin/audio-loader": "^1.2.2",
+    "@dr.pogodin/audio-loader": "^1.2.3",
     "note-parser": "^2.0.0",
     "sample-player": "^0.5.5"
   },
